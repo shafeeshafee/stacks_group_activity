@@ -84,7 +84,6 @@ const parensAreBalanced = (input) => {
 	if (temp.length % 2 === 1) {
 		return false;
 	}
-
 	return true;
 };
 
@@ -95,7 +94,6 @@ let reverseStack = (stack) => {
 	if (!stack.isEmpty()) {
 		let temp = stack.pop();
 		reverseStack(stack);
-
 		insertAtBottom(temp, stack);
 	}
 };
@@ -111,11 +109,15 @@ let insertAtBottom = (temp, stack) => {
 };
 
 let myStack = new Stack();
+
 myStack.push("I");
-myStack.push("Am");
-myStack.push("Developer");
-while (myStack.isEmpty() === false) {
+myStack.push("will");
+myStack.push("never");
+myStack.push("give");
+myStack.push("up");
+
+reverseStack(myStack);
+
+while (!myStack.isEmpty()) {
 	console.log(myStack.pop());
 }
-
-console.log(reverseStack(myStack));
