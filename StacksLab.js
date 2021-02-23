@@ -42,23 +42,80 @@ class Stack {
 		return str;
 	}
 }
+// ============================================== //
 
-// create object of the stack class
+// palindrome
+function checkPalindrome(str) {
+	const myStack = new Stack();
+	let reverseWord = "";
+
+	for (let i = 0; i < str.length; i++) {
+		myStack.push(str[i]);
+	}
+
+	for (let y = 0; y < str.length; y++) {
+		reverseWord += myStack.pop();
+	}
+
+	return reverseWord === str;
+}
+
+console.log(checkPalindrome("bob"));
+
+// balance parens
+const parensAreBalanced = (input) => {
+	const openers = ["(", "{", "["];
+	const closers = [")", "}", "]"];
+
+	let temp = [];
+
+	for (item of input.split("")) {
+		if (openers.includes(item)) {
+			temp.push(item);
+		}
+	}
+
+	for (item of input.split("")) {
+		if (closers.includes(item)) {
+			temp.push(item);
+		}
+	}
+
+	if (temp.length % 2 === 1) {
+		return false;
+	}
+
+	return true;
+};
+
+console.log(parensAreBalanced("([])"));
+
+// reverse stack
+let reverseStack = (stack) => {
+	if (!stack.isEmpty()) {
+		let temp = stack.pop();
+		reverseStack(stack);
+
+		insertAtBottom(temp, stack);
+	}
+};
+
+let insertAtBottom = (temp, stack) => {
+	if (stack.isEmpty()) {
+		stack.push(temp);
+	} else {
+		let x = stack.pop();
+		insertAtBottom(temp, stack);
+		stack.push(x);
+	}
+};
 
 let myStack = new Stack();
+myStack.push("I");
+myStack.push("Am");
+myStack.push("Developer");
+while (myStack.isEmpty() === false) {
+	console.log(myStack.pop());
+}
 
-// adding elements into my stack
-myStack.push(10);
-myStack.push(20);
-myStack.push(30);
-
-// print the stack elements
-console.log(myStack.printStack());
-
-// check element at the top
-console.log(myStack.peek());
-
-// pop
-myStack.pop();
-myStack.pop();
-console.log(myStack.printStack());
+console.log(reverseStack(myStack));
